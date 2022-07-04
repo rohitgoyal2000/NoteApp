@@ -46,7 +46,7 @@ function showNotes() {
                             <h5 class="card-title">${element.title}</h5>
                             <p class="card-text"> ${element.text}</p>
                             <button id="${index}"onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
-                            <button id="${index}"onclick="EditNote(this.id)" class="btn btn-primary">Edit Note</button>
+                            <button id="${index}"onclick="EditNote(this.id)" class=" btn btn-primary">Edit Note</button>
                         </div>
                     </div>`;
   });
@@ -102,7 +102,8 @@ search.addEventListener("input", function () {
 // function to Edit a note
 function EditNote(index) {
   let notes = localStorage.getItem("notes");
-
+  
+  
   if (AddTitle.value != "" || addTxt.value != "") {
     return alert("Please Clear the form before editing a note");
   }
@@ -112,13 +113,12 @@ function EditNote(index) {
   } else {
     notesObj = JSON.parse(notes);
   }
+ 
 
-  notesObj.findIndex((element, index) => {
-    AddTitle.value = element.title;
-    addTxt.value = element.text;
-    console.log(notesObj);
-  });
-  
+  AddTitle.value = notesObj[index].title;
+  addTxt.value = notesObj[index].text;
+
+  console.log(notesObj[index]);
   notesObj.splice(index, 1);
   localStorage.setItem("notes", JSON.stringify(notesObj));
   
